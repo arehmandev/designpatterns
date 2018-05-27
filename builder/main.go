@@ -1,8 +1,9 @@
 package main
 
 import (
-	"designpatterns/builder/pkg/vehicle"
 	"log"
+
+	"github.com/arehmandev/designpatterns/builder/pkg/vehicle"
 )
 
 func main() {

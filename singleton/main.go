@@ -1,8 +1,9 @@
 package main
 
 import (
-	"designpatterns/singleton/pkg/singleton"
 	"fmt"
+
+	"github.com/arehmandev/designpatterns/singleton/pkg/singleton"
 )
 
 func main() {
