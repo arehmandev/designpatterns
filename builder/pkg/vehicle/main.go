@@ -1,5 +1,18 @@
 package vehicle
 
+const (
+	// DefaultName - the name of a default car
+	DefaultName = "Nissan"
+	// DefaultColor - the color of your car if its not selected
+	DefaultColor = "silver"
+	// DefaultWheels - the wheels of your car if its not selected
+	DefaultWheels = "flintstonewheels"
+	// MPH - Speed in Miles per hour
+	MPH = 1
+	// KPH - Speed of Kilometres n miles per hour
+	KPH = 1.60934
+)
+
 // Car -
 type Car Vehicle
 
@@ -24,15 +37,22 @@ type Vehicle struct {
 	SpeedKPH float64
 }
 
-const (
-	// DefaultName - the name of a default car
-	DefaultName = "Nissan"
-	// DefaultColor - the color of your car if its not selected
-	DefaultColor = "silver"
-	// DefaultWheels - the wheels of your car if its not selected
-	DefaultWheels = "flintstonewheels"
-	// MPH - Speed in Miles per hour
-	MPH = 1
-	// KPH - Speed of Kilometres n miles per hour
-	KPH = 1.60934
-)
+// Actions - interface for Vehicle functionality
+type Actions interface {
+	Check() error
+	Drive() error
+	Stop() error
+}
+
+// Factory - creates a Vehicle from specified params
+func Factory(VehicleName, paintColor, wheelType string, topVehicleSpeedMPH float64, vehicleType string) Actions {
+
+	switch vehicleType {
+	case "car":
+		return newCar(VehicleName, paintColor, wheelType, topVehicleSpeedMPH)
+	case "truck":
+		return newTruck(VehicleName, paintColor, wheelType, topVehicleSpeedMPH)
+	default:
+		return nil
+	}
+}
