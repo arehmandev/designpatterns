@@ -3,30 +3,30 @@ package vehicle
 import "fmt"
 
 func newTruck(VehicleName, paintColor, wheelType string, topVehicleSpeedMPH float64) *Truck {
-	myVehicle := new(Truck)
-	myVehicle.Name = VehicleName
-	myVehicle.Color = paintColor
-	myVehicle.SpeedMPH = topVehicleSpeedMPH
-	myVehicle.SpeedKPH = topVehicleSpeedMPH * KPH
-	myVehicle.Wheels = wheelType
+	myTruck := new(Truck)
+	myTruck.Properties.Name = VehicleName
+	myTruck.Properties.Color = paintColor
+	myTruck.Properties.SpeedMPH = topVehicleSpeedMPH
+	myTruck.Properties.SpeedKPH = topVehicleSpeedMPH * KPH
+	myTruck.Properties.Wheels = wheelType
 	fmt.Println("Your brand new Vehicle has been built! Specs below:")
 	fmt.Printf("[NAME: %v] Color: %v, TOPSPEED(MPH/KPH): %v/%v, Wheels: %v\n",
-		myVehicle.Name,
-		myVehicle.Color,
-		myVehicle.SpeedMPH,
-		myVehicle.SpeedKPH,
-		myVehicle.Wheels)
-	return myVehicle
+		myTruck.Properties.Name,
+		myTruck.Properties.Color,
+		myTruck.Properties.SpeedMPH,
+		myTruck.Properties.SpeedKPH,
+		myTruck.Properties.Wheels)
+	return myTruck
 }
 
 // Drive - Drive your Truck
 func (myTruck Truck) Drive() error {
 
-	if myTruck.SpeedMPH <= 0 {
-		return fmt.Errorf("Can't drive at this speed: %v MPH", myTruck.SpeedMPH)
+	if myTruck.Properties.SpeedMPH <= 0 {
+		return fmt.Errorf("Can't drive at this speed: %v MPH", myTruck.Properties.SpeedMPH)
 	}
 
-	fmt.Printf("Driving your Truck at max speed: %v MPH || %v KPH\n", myTruck.SpeedMPH, myTruck.SpeedKPH)
+	fmt.Printf("Driving your Truck at max speed: %v MPH || %v KPH\n", myTruck.Properties.SpeedMPH, myTruck.Properties.SpeedKPH)
 
 	return nil
 }
@@ -34,12 +34,12 @@ func (myTruck Truck) Drive() error {
 // Stop - Stop your Truck
 func (myTruck Truck) Stop() error {
 
-	if myTruck.SpeedMPH == 0 {
+	if myTruck.Properties.SpeedMPH == 0 {
 		return fmt.Errorf("Can't stop Truck, already stopped")
 	}
 
-	myTruck.SpeedMPH = 0
-	myTruck.SpeedKPH = 0
+	myTruck.Properties.SpeedMPH = 0
+	myTruck.Properties.SpeedKPH = 0
 
 	fmt.Println("Stopping Truck - speed is now 0")
 
@@ -49,25 +49,25 @@ func (myTruck Truck) Stop() error {
 // Check - Check you Truck is correct
 func (myTruck Truck) Check() error {
 
-	if myTruck.SpeedMPH <= 0 {
-		return fmt.Errorf("Can't drive at this speed: %v MPH", myTruck.SpeedMPH)
+	if myTruck.Properties.SpeedMPH <= 0 {
+		return fmt.Errorf("Can't drive at this speed: %v MPH", myTruck.Properties.SpeedMPH)
 	}
 
-	if myTruck.Name == "" {
+	if myTruck.Properties.Name == "" {
 		fmt.Println("Your Truck has not been named - defaulting to name:", DefaultName)
-		myTruck.Name = DefaultName
+		myTruck.Properties.Name = DefaultName
 		return nil
 	}
 
-	if myTruck.Color == "" {
+	if myTruck.Properties.Color == "" {
 		fmt.Println("Your Truck has not been painted any color - defaulting to color:", DefaultColor)
-		myTruck.Color = DefaultColor
+		myTruck.Properties.Color = DefaultColor
 		return nil
 	}
 
-	if myTruck.Wheels == "" {
+	if myTruck.Properties.Wheels == "" {
 		fmt.Println("Your Truck wheels have not been selected - defaulting to wheels:", DefaultWheels)
-		myTruck.Wheels = DefaultWheels
+		myTruck.Properties.Wheels = DefaultWheels
 		return nil
 	}
 
@@ -78,11 +78,11 @@ func (myTruck Truck) Check() error {
 func (myTruck Truck) String() string {
 
 	printString := fmt.Sprintf("[NAME: %v] Color: %v, TOPSPEED(MPH/KPH): %v/%v, Wheels: %v\n",
-		myTruck.Name,
-		myTruck.Color,
-		myTruck.SpeedMPH,
-		myTruck.SpeedKPH,
-		myTruck.Wheels)
+		myTruck.Properties.Name,
+		myTruck.Properties.Color,
+		myTruck.Properties.SpeedMPH,
+		myTruck.Properties.SpeedKPH,
+		myTruck.Properties.Wheels)
 
 	return printString
 }

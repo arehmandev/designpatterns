@@ -14,10 +14,16 @@ const (
 )
 
 // Car -
-type Car Vehicle
+type Car struct {
+	Properties Vehicle
+}
 
 // Truck -
-type Truck Vehicle
+type Truck struct {
+	Properties Vehicle
+	Height     int
+	Weight     int
+}
 
 // Vehicle - struct containing all fields for a transport vehicle
 type Vehicle struct {

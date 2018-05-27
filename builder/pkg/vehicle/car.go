@@ -3,26 +3,26 @@ package vehicle
 import "fmt"
 
 func newCar(VehicleName, paintColor, wheelType string, topVehicleSpeedMPH float64) *Car {
-	myVehicle := new(Car)
-	myVehicle.Name = VehicleName
-	myVehicle.Color = paintColor
-	myVehicle.SpeedMPH = topVehicleSpeedMPH
-	myVehicle.SpeedKPH = topVehicleSpeedMPH * KPH
-	myVehicle.Wheels = wheelType
+	myCar := new(Car)
+	myCar.Properties.Name = VehicleName
+	myCar.Properties.Color = paintColor
+	myCar.Properties.SpeedMPH = topVehicleSpeedMPH
+	myCar.Properties.SpeedKPH = topVehicleSpeedMPH * KPH
+	myCar.Properties.Wheels = wheelType
 	fmt.Println("Your brand new Vehicle has been built! Specs below:")
-	fmt.Println(myVehicle)
+	fmt.Println(myCar)
 
-	return myVehicle
+	return myCar
 }
 
 // Drive - Drive your car
 func (myCar Car) Drive() error {
 
-	if myCar.SpeedMPH <= 0 {
-		return fmt.Errorf("Can't drive at this speed: %v MPH", myCar.SpeedMPH)
+	if myCar.Properties.SpeedMPH <= 0 {
+		return fmt.Errorf("Can't drive at this speed: %v MPH", myCar.Properties.SpeedMPH)
 	}
 
-	fmt.Printf("Driving your Car at max speed: %v MPH || %v KPH\n", myCar.SpeedMPH, myCar.SpeedKPH)
+	fmt.Printf("Driving your Car at max speed: %v MPH || %v KPH\n", myCar.Properties.SpeedMPH, myCar.Properties.SpeedKPH)
 
 	return nil
 }
@@ -30,12 +30,12 @@ func (myCar Car) Drive() error {
 // Stop - Stop your car
 func (myCar Car) Stop() error {
 
-	if myCar.SpeedMPH == 0 {
+	if myCar.Properties.SpeedMPH == 0 {
 		return fmt.Errorf("Can't stop Car, already stopped")
 	}
 
-	myCar.SpeedMPH = 0
-	myCar.SpeedKPH = 0
+	myCar.Properties.SpeedMPH = 0
+	myCar.Properties.SpeedKPH = 0
 
 	fmt.Println("Stopping car - speed is now 0")
 
@@ -45,25 +45,25 @@ func (myCar Car) Stop() error {
 // Check - Check you Car is correct
 func (myCar Car) Check() error {
 
-	if myCar.SpeedMPH <= 0 {
-		return fmt.Errorf("Can't drive at this speed: %v MPH", myCar.SpeedMPH)
+	if myCar.Properties.SpeedMPH <= 0 {
+		return fmt.Errorf("Can't drive at this speed: %v MPH", myCar.Properties.SpeedMPH)
 	}
 
-	if myCar.Name == "" {
+	if myCar.Properties.Name == "" {
 		fmt.Println("Your Car has not been named - defaulting to name:", DefaultName)
-		myCar.Name = DefaultName
+		myCar.Properties.Name = DefaultName
 		return nil
 	}
 
-	if myCar.Color == "" {
+	if myCar.Properties.Color == "" {
 		fmt.Println("Your Car has not been painted any color - defaulting to color:", DefaultColor)
-		myCar.Color = DefaultColor
+		myCar.Properties.Color = DefaultColor
 		return nil
 	}
 
-	if myCar.Wheels == "" {
+	if myCar.Properties.Wheels == "" {
 		fmt.Println("Your Car wheels have not been selected - defaulting to wheels:", DefaultWheels)
-		myCar.Wheels = DefaultWheels
+		myCar.Properties.Wheels = DefaultWheels
 		return nil
 	}
 
@@ -74,11 +74,11 @@ func (myCar Car) Check() error {
 func (myCar Car) String() string {
 
 	printString := fmt.Sprintf("[NAME: %v] Color: %v, TOPSPEED(MPH/KPH): %v/%v, Wheels: %v\n",
-		myCar.Name,
-		myCar.Color,
-		myCar.SpeedMPH,
-		myCar.SpeedKPH,
-		myCar.Wheels)
+		myCar.Properties.Name,
+		myCar.Properties.Color,
+		myCar.Properties.SpeedMPH,
+		myCar.Properties.SpeedKPH,
+		myCar.Properties.Wheels)
 
 	return printString
 }
