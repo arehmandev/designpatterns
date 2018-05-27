@@ -1,10 +1,13 @@
 package vehicle
 
-// Truck -
-type Truck Car
+// Car -
+type Car Vehicle
 
-// Car - struct containing all fields for a car
-type Car struct {
+// Truck -
+type Truck Vehicle
+
+// Vehicle - struct containing all fields for a transport vehicle
+type Vehicle struct {
 	// Name - give a name to your car
 	Name string
 
@@ -33,10 +36,3 @@ const (
 	// KPH - Speed of Kilometres n miles per hour
 	KPH = 1.60934
 )
-
-// Actions - interface for car functionality
-type Actions interface {
-	Check() error
-	Drive() error
-	Stop() error
-}
