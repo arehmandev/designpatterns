@@ -9,13 +9,15 @@ import (
 
 func main() {
 	fmt.Println("------- VEHICLE 1 -------")
-	newCar := vehicle.Factory("Mercedes", "green", "special", float64(102.5), "car")
-	err := vehicle.RunDemo(newCar)
+	newCar, err := vehicle.Factory("Mercedes", "green", "special", float64(102.5), "car")
+	check(err)
+	err = vehicle.RunDemo(newCar)
 	check(err)
 
 	fmt.Println("------- VEHICLE 2 -------")
 
-	newTruck := vehicle.Factory("BigTruck", "grey", "huge", float64(82.5), "truck")
+	newTruck, err := vehicle.Factory("BigTruck", "grey", "huge", float64(82.5), "truck")
+	check(err)
 	err = vehicle.RunDemo(newTruck)
 	check(err)
 

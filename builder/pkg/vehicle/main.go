@@ -1,5 +1,7 @@
 package vehicle
 
+import "fmt"
+
 const (
 	// DefaultName - the name of a default car
 	DefaultName = "Nissan"
@@ -45,20 +47,51 @@ type Vehicle struct {
 
 // Actions - interface for Vehicle functionality
 type Actions interface {
-	Check() error
 	Drive() error
 	Stop() error
 }
 
 // Factory - creates a Vehicle from specified params
-func Factory(VehicleName, paintColor, wheelType string, topVehicleSpeedMPH float64, vehicleType string) Actions {
+func Factory(VehicleName, paintColor, wheelType string, topVehicleSpeedMPH float64, vehicleType string) (actions Actions, err error) {
 
 	switch vehicleType {
 	case "car":
-		return newCar(VehicleName, paintColor, wheelType, topVehicleSpeedMPH)
+		car := newCar(VehicleName, paintColor, wheelType, topVehicleSpeedMPH)
+		err := car.Properties.Check()
+		return car, err
 	case "truck":
-		return newTruck(VehicleName, paintColor, wheelType, topVehicleSpeedMPH)
+		truck := newTruck(VehicleName, paintColor, wheelType, topVehicleSpeedMPH)
+		err := truck.Properties.Check()
+		return truck, err
 	default:
+		return nil, nil
+	}
+}
+
+// Check - Check you Car is correct
+func (myVehicle *Vehicle) Check() error {
+
+	if myVehicle.SpeedMPH <= 0 {
+		return fmt.Errorf("Can't drive at this speed: %v MPH", myVehicle.SpeedMPH)
+	}
+
+	if myVehicle.Name == "" {
+		fmt.Println("Your Car has not been named - defaulting to name:", DefaultName)
+		myVehicle.Name = DefaultName
 		return nil
 	}
+
+	if myVehicle.Color == "" {
+		fmt.Println("Your Car has not been painted any color - defaulting to color:", DefaultColor)
+		myVehicle.Color = DefaultColor
+		return nil
+	}
+
+	if myVehicle.Wheels == "" {
+		fmt.Println("Your Car wheels have not been selected - defaulting to wheels:", DefaultWheels)
+		myVehicle.Wheels = DefaultWheels
+		return nil
+	}
+
+	return nil
 }
