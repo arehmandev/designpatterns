@@ -48,21 +48,32 @@ func (L *List) Show() {
 	fmt.Println()
 }
 
+// ShowBackwards -
+func ShowBackwards(list *Node) {
+	for list != nil {
+		fmt.Printf("%v <-", list.key)
+		list = list.prev
+	}
+	fmt.Println()
+}
+
+// 1 -> 2 -> 3 -> 4 -> nil
+// nil <- 1 <- 2 <- 3 <- 4
+
 // Reverse -
 func (L *List) Reverse() {
-	// Start at tail
-	currentNode := L.tail
-	// currentNode.next = currentNode.prev
+	curr := L.head
+	var prev *Node
+	L.tail = L.head
 
-	for currentNode.prev != nil {
-		prevNode := currentNode.prev
-		nextNode := currentNode.next
-		currentNode.next = prevNode
-		currentNode.prev = nextNode
+	for curr != nil {
+		next := curr.next
+		curr.next = prev
+		curr.prev = next
+		prev = curr
+		curr = next
 	}
-
-	L.tail.next = nil
-
+	L.head = prev
 }
 
 func main() {
@@ -80,6 +91,20 @@ func main() {
 
 	l.Reverse()
 	l.Show()
+	ShowBackwards(l.tail)
 	fmt.Printf("head: %v\n", l.head.key)
 	fmt.Printf("tail: %v\n", l.tail.key)
 }
+
+/**
+Start from head Node
+
+store NextNode
+
+currentNode.prev = currentNode.next
+currentNode.next = currentNode.prev
+
+loop through nodes, until reaching currentNode.Next = nil
+
+
+**/
