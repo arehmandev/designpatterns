@@ -40,6 +40,7 @@ func (L *List) Insert(key interface{}) {
 
 // Show - iterates from head to tail and prints all keys
 func (L *List) Show() {
+	fmt.Println("[FORWARD PRINT] Printing each node, iteration through .next to each next node")
 	list := L.head
 	for list != nil {
 		fmt.Printf("%+v ->", list.key)
@@ -49,7 +50,9 @@ func (L *List) Show() {
 }
 
 // ShowBackwards -
-func ShowBackwards(list *Node) {
+func (L *List) ShowBackwards() {
+	fmt.Println("[REVERSE PRINT] Printing each node, iteration through .prev to each previous node")
+	list := L.tail
 	for list != nil {
 		fmt.Printf("%v <-", list.key)
 		list = list.prev
@@ -62,18 +65,20 @@ func ShowBackwards(list *Node) {
 
 // Reverse -
 func (L *List) Reverse() {
+	fmt.Println("[REVERSING LINKED LIST]")
 	curr := L.head
-	var prev *Node
 	L.tail = L.head
 
+	var prevNode *Node
+
 	for curr != nil {
-		next := curr.next
-		curr.next = prev
-		curr.prev = next
-		prev = curr
-		curr = next
+		nextNode := curr.next
+		curr.next = prevNode
+		curr.prev = nextNode
+		prevNode = curr
+		curr = nextNode
 	}
-	L.head = prev
+	L.head = prevNode
 }
 
 func main() {
@@ -88,12 +93,15 @@ func main() {
 	fmt.Printf("head: %v\n", l.head.key)
 	fmt.Printf("tail: %v\n", l.tail.key)
 	l.Show()
+	l.ShowBackwards()
 
+	fmt.Println("===========================================")
 	l.Reverse()
-	l.Show()
-	ShowBackwards(l.tail)
 	fmt.Printf("head: %v\n", l.head.key)
 	fmt.Printf("tail: %v\n", l.tail.key)
+	l.Show()
+	l.ShowBackwards()
+
 }
 
 /**
