@@ -17,27 +17,25 @@ type List struct {
 
 // Insert -
 func (L *List) Insert(key interface{}) {
-	newNode := &Node{
+	newHead := &Node{
 		next: L.head,
 		key:  key,
 	}
 
-	// If list head is not empty, add a 'prev' node entry to the head
-	if L.head != nil {
-		L.head.prev = newNode
-		L.tail = newNode
+	// Keep track of oldHead
+	oldHead := L.head
+
+	// Always insert new head
+	L.head = newHead
+
+	if oldHead == nil {
+		// If head was originally null, also make it the tail
+		L.tail = newHead
+	} else {
+		// If list head is not empty, add a 'prev' node entry to the oldHead
+		oldHead.prev = newHead
 	}
 
-	L.head = newNode
-
-	// If list tail is empty, then loop through from head next, and set the last node as the tail
-	if L.tail == nil {
-		l := L.head
-		for l.next != nil {
-			l = l.next
-		}
-		L.tail = l
-	}
 }
 
 // Show - iterates from head to tail and prints all keys
