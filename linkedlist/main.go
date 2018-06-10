@@ -40,7 +40,7 @@ func (L *List) Insert(key interface{}) {
 	}
 }
 
-// Show -
+// Show - iterates from head to tail and prints all keys
 func (L *List) Show() {
 	list := L.head
 	for list != nil {
@@ -49,27 +49,6 @@ func (L *List) Show() {
 	}
 	fmt.Println()
 }
-
-// Show -
-func Show(list *Node) {
-	for list != nil {
-		fmt.Printf("%v ->", list.key)
-		list = list.next
-	}
-	fmt.Println()
-}
-
-// ShowBackwards -
-func ShowBackwards(list *Node) {
-	for list != nil {
-		fmt.Printf("%v <-", list.key)
-		list = list.prev
-	}
-	fmt.Println()
-}
-
-// 1 -> 2 -> 3 -> 4 -> nil
-// nil <- 1 <- 2 <- 3 <- 4
 
 // Reverse -
 func (L *List) Reverse() {
@@ -84,7 +63,6 @@ func (L *List) Reverse() {
 		curr = next
 	}
 	L.head = prev
-	Show(L.head)
 }
 
 func main() {
@@ -99,8 +77,9 @@ func main() {
 	fmt.Printf("head: %v\n", l.head.key)
 	fmt.Printf("tail: %v\n", l.tail.key)
 	l.Show()
-	l.Reverse()
 
+	l.Reverse()
+	l.Show()
 	fmt.Printf("head: %v\n", l.head.key)
 	fmt.Printf("tail: %v\n", l.tail.key)
 }
