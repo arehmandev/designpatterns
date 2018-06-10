@@ -50,17 +50,19 @@ func (L *List) Show() {
 
 // Reverse -
 func (L *List) Reverse() {
-	curr := L.head
-	var prev *Node
-	L.tail = L.head
+	// Start at tail
+	currentNode := L.tail
+	// currentNode.next = currentNode.prev
 
-	for curr != nil {
-		next := curr.next
-		curr.next = prev
-		prev = curr
-		curr = next
+	for currentNode.prev != nil {
+		prevNode := currentNode.prev
+		nextNode := currentNode.next
+		currentNode.next = prevNode
+		currentNode.prev = nextNode
 	}
-	L.head = prev
+
+	L.tail.next = nil
+
 }
 
 func main() {
