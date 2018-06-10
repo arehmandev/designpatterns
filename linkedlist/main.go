@@ -29,10 +29,10 @@ func (L *List) Insert(key interface{}) {
 	L.head = newHead
 
 	if oldHead == nil {
-		// If head was originally null, also make it the tail
+		// If oldHead was originally null, also make it the tail
 		L.tail = newHead
 	} else {
-		// If list head is not empty, add a 'prev' node entry to the oldHead
+		// If list oldHead is not empty, add a 'prev' node entry to the oldHead
 		oldHead.prev = newHead
 	}
 
