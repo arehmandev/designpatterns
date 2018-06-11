@@ -77,12 +77,12 @@ func (L *List) Reverse() {
 	var prevNode *Node
 
 	for curr != nil {
-		prevNode = curr
 		nextNode := curr.next
 
-		curr.prev = nextNode
 		curr.next = prevNode
+		curr.prev = nextNode
 
+		prevNode = curr
 		curr = nextNode
 	}
 	L.head = prevNode
