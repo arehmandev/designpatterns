@@ -66,16 +66,23 @@ func (L *List) ShowBackwards() {
 // Reverse -
 func (L *List) Reverse() {
 	fmt.Println("[REVERSING LINKED LIST]")
+
+	// Current node is head
 	curr := L.head
+
+	// Switch tail to current head
 	L.tail = L.head
 
+	// Keep track of the previous node (starts as null for head)
 	var prevNode *Node
 
 	for curr != nil {
-		nextNode := curr.next
-		curr.next = prevNode
-		curr.prev = nextNode
 		prevNode = curr
+		nextNode := curr.next
+
+		curr.prev = nextNode
+		curr.next = prevNode
+
 		curr = nextNode
 	}
 	L.head = prevNode
